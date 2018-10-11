@@ -19,7 +19,8 @@ program
     .option('-p, --path <path>', 'The path used to link the files, default is "/", pass "" to link relative to the index.html.')
     .option('-t, --template <file path>', 'Provide a custom index.html template. Use {{> head}}, {{> css}} and {{> scripts}} to place the meteor resources.')
     .option('-s, --settings <settings.json>', 'Set optional data for Meteor.settings in your application.')
-    .option('-u, --url <url>', 'The Root URL of your app. If "default", Meteor will try to connect to the Server where it was served from. Default is: "" (empty string)');
+    .option('-u, --url <url>', 'The Root URL of your app. If "default", Meteor will try to connect to the Server where it was served from. Default is: "" (empty string)')
+    .option('-l, --legacy', 'The Root URL of your app. If "default", Meteor will try to connect to the Server where it was served from. Default is: "" (empty string)');
     // .option('-d, --ddp <url>', 'The URL of your Meteor DDP server, e.g. "ddp+sockjs://ddp.myapp.com/sockjs". If you don\'t add any it will also add call "Meteor.disconnect();" to prevent the app from conneting.');
 
 program.on('--help', function(){
@@ -54,7 +55,7 @@ Q.try(function() {
 .then(function() {
     console.log('Generating the index.html...');
     
-    return meteor.move();
+    return meteor.move(program);
 })
 .then(function() {
     return meteor.addIndexFile(program);

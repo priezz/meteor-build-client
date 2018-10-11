@@ -13,6 +13,8 @@ var argPath = process.argv[2],
     basePath = './',
     buildPath = path.resolve(argPath),
     bundleName = path.basename(path.resolve(basePath));
+var browserPaths = ['/bundle/programs/web.browser', '/bundle/programs/web.browser/app'],
+    legacyBrowserPaths = ['/bundle/programs/web.browser.legacy', '/bundle/programs/web.browser.legacy/app'];
 
 // execute shell scripts
 var execute = function(command, name) {
@@ -71,13 +73,11 @@ module.exports = {
             return execute(command, 'build the app, are you in your meteor apps folder?');                        
         });
     },
-    move: function(){
+    move: function(program){
         return Q.try(function() {
+            var paths = program.legacy ? legacyBrowserPaths : browserPaths;
             try {
-                _.each([
-                    '/bundle/programs/web.browser',
-                    '/bundle/programs/web.browser/app'
-                ], function(givenPath){
+                _.each(paths, function(givenPath){
                     var clientPath = path.join(buildPath, givenPath);
                     var rootFolder = fs.readdirSync(clientPath);
                     rootFolder = _.without(rootFolder, 'app');
