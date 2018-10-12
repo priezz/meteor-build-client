@@ -48,7 +48,7 @@ Q.try(function() {
     }
 })
 .then(function() {
-    console.log('Bundling Meteor app...');
+    console.log('Bundling Meteor app'+(program.legacy ? ' (legacy client only)' : '')+'...');
     
     return meteor.build(program);
 })
