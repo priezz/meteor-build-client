@@ -35,6 +35,12 @@ For a list of options see:
 
     $ meteor-build-client --help
 
+### Legacy browsers support
+
+You can pass an additional `--legacy`:
+
+    $ meteor-build-client ../myOutputFolder --legacy
+
 ### Passing a settings.json
 
 You can pass an additional settings file using the `--settings` or `-s` option:
